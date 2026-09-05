@@ -35,7 +35,6 @@ public class FakeStoreProductService implements ProductService{
         category.setTitle(fakeStoreProductDto.getCategory());
 
         product.setCategory(category);
-
         return product;
     }
 }
