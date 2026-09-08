@@ -49,6 +49,16 @@ public class ProductController {
         return productService.replaceProduct(id, product);
     }
 
+    @PatchMapping("/{id}")
+    public Product updateProductById(@PathVariable("id") Long id, @RequestBody Product product){
+        return productService.updateProductById(id,product);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable("id") Long id) throws ProductNotFoundException {
+        productService.deleteProductById(id);
+    }
+
 //    @ExceptionHandler(ProductNotFoundException.class)
 //    public ResponseEntity<ProductNotFoundExceptionDto> handleInstanceNotFoundException(ProductNotFoundException exception) {
 //        ProductNotFoundExceptionDto productNotFoundExceptionDto = new ProductNotFoundExceptionDto();

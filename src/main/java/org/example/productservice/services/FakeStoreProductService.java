@@ -11,7 +11,6 @@ import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestTemplate;
 
-import javax.management.InstanceNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +60,52 @@ public class FakeStoreProductService implements ProductService{
                         execute("https://fakestoreapi.com/products/" + id, HttpMethod.PUT, requestCallback, responseExtractor)
                         .getBody();
         return convertFakeStoreProductDtotoProduct(fakeStoreProductDto1);
+    }
+
+    @Override
+    public Product updateProductById(Long id, Product product) {
+        Product existingProduct = null;
+        try {
+            existingProduct = getProductById(id);
+        } catch (ProductNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        if (product.getTitle() != null) {
+            existingProduct.setTitle(product.getTitle());
+        }
+        if (product.getDesc() != null) {
+            existingProduct.setDesc(product.getDesc());
+        }
+        if (product.getPrice() != null) {
+            existingProduct.setPrice(product.getPrice());
+        }
+        if(product.getCategory() != null) {
+            existingProduct.setCategory(product.getCategory());
+        }
+        FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
+        fakeStoreProductDto.setTitle(existingProduct.getTitle());
+        fakeStoreProductDto.setPrice(existingProduct.getPrice());
+        fakeStoreProductDto.setDescription(existingProduct.getDesc());
+        fakeStoreProductDto.setCategory(existingProduct.getCategory().getTitle());
+
+        RequestCallback requestCallback = restTemplate.httpEntityCallback(fakeStoreProductDto, FakeStoreProductDto.class);
+        ResponseExtractor<ResponseEntity<FakeStoreProductDto>> responseExtractor =
+                restTemplate.responseEntityExtractor(FakeStoreProductDto.class);
+
+        FakeStoreProductDto fakeStoreProductDto1 =
+                restTemplate.
+                        execute("https://fakestoreapi.com/products/" + id, HttpMethod.PATCH, requestCallback, responseExtractor)
+                        .getBody();
+        return convertFakeStoreProductDtotoProduct(fakeStoreProductDto1);
+    }
+
+    @Override
+    public void deleteProductById(Long id) throws ProductNotFoundException {
+        Product product = getProductById(id);
+        if(product == null) {
+            throw new ProductNotFoundException(100L, "Product not found for ID: "+id);
+        }
+        restTemplate.delete("https://fakestoreapi.com/products/" + id);
     }
 
     private Product convertFakeStoreProductDtotoProduct(FakeStoreProductDto fakeStoreProductDto) {
