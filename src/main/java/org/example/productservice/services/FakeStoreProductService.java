@@ -49,7 +49,7 @@ public class FakeStoreProductService implements ProductService{
         FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
         fakeStoreProductDto.setTitle(product.getTitle());
         fakeStoreProductDto.setPrice(product.getPrice());
-        fakeStoreProductDto.setDescription(product.getDesc());
+        fakeStoreProductDto.setDescription(product.getDescription());
 
         RequestCallback requestCallback = restTemplate.httpEntityCallback(fakeStoreProductDto, FakeStoreProductDto.class);
         ResponseExtractor<ResponseEntity<FakeStoreProductDto>> responseExtractor =
@@ -73,8 +73,8 @@ public class FakeStoreProductService implements ProductService{
         if (product.getTitle() != null) {
             existingProduct.setTitle(product.getTitle());
         }
-        if (product.getDesc() != null) {
-            existingProduct.setDesc(product.getDesc());
+        if (product.getDescription() != null) {
+            existingProduct.setDescription(product.getDescription());
         }
         if (product.getPrice() != null) {
             existingProduct.setPrice(product.getPrice());
@@ -85,7 +85,7 @@ public class FakeStoreProductService implements ProductService{
         FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
         fakeStoreProductDto.setTitle(existingProduct.getTitle());
         fakeStoreProductDto.setPrice(existingProduct.getPrice());
-        fakeStoreProductDto.setDescription(existingProduct.getDesc());
+        fakeStoreProductDto.setDescription(existingProduct.getDescription());
         fakeStoreProductDto.setCategory(existingProduct.getCategory().getTitle());
 
         RequestCallback requestCallback = restTemplate.httpEntityCallback(fakeStoreProductDto, FakeStoreProductDto.class);
@@ -114,7 +114,7 @@ public class FakeStoreProductService implements ProductService{
         Product product = new Product();
         product.setId(fakeStoreProductDto.getId());
         product.setTitle(fakeStoreProductDto.getTitle());
-        product.setDesc(fakeStoreProductDto.getDescription());
+        product.setDescription(fakeStoreProductDto.getDescription());
         product.setPrice(fakeStoreProductDto.getPrice());
 
         Category category = new Category();
