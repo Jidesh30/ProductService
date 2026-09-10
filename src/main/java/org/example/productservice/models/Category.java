@@ -9,5 +9,5 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Category extends BaseModel{
-
+    String description;
 }

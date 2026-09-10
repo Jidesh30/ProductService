@@ -108,6 +108,11 @@ public class FakeStoreProductService implements ProductService{
         restTemplate.delete("https://fakestoreapi.com/products/" + id);
     }
 
+    @Override
+    public Product createProduct(Product product) {
+        return null;
+    }
+
     private Product convertFakeStoreProductDtotoProduct(FakeStoreProductDto fakeStoreProductDto) {
         if(fakeStoreProductDto == null) return null;
 
