@@ -1,9 +1,9 @@
 package org.example.productservice.services;
 
-import org.apache.catalina.Store;
 import org.example.productservice.exceptions.ProductNotFoundException;
 import org.example.productservice.models.Category;
 import org.example.productservice.models.Product;
+import org.example.productservice.projections.ProductTitleAndDescription;
 import org.example.productservice.repos.CategoryRepo;
 import org.example.productservice.repos.ProductRepo;
 import org.springframework.context.annotation.Primary;
@@ -25,7 +25,10 @@ public class SelfProductService implements ProductService {
 
     @Override
     public Product getProductById(Long id) throws ProductNotFoundException {
-        return null;
+        ProductTitleAndDescription productTitleAndDescription = productRepo.getProductByTitleAndDesc(id);
+        System.out.println("Title: " + productTitleAndDescription.getTitle() +  " Desc: " + productTitleAndDescription.getDescription());
+        return productRepo.findById(id).get();
+//        return productRepo.getProductByTitleAndDesc(id);
     }
 
     @Override
