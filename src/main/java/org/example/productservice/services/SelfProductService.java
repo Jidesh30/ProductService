@@ -53,13 +53,13 @@ public class SelfProductService implements ProductService {
 
     @Override
     public Product createProduct(Product product) {
-        Category category = product.getCategory();
-        if(category.getId() == null){
-            Category savedCategory = categoryRepo.save(category);
-            product.setCategory(savedCategory);
-        } else {
-
-        }
+//        Category category = product.getCategory();
+//        if(category.getId() == null){
+//            Category savedCategory = categoryRepo.save(category);
+//            product.setCategory(savedCategory);
+//        } else {
+//
+//        }
         return productRepo.save(product);
     }
 }
