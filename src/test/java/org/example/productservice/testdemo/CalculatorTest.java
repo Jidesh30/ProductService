@@ -38,7 +38,7 @@ class CalculatorTest {
         //Act
 //        int result = calculator.divide(a, b);
 
-        //Assert
+        //Act & Assert
         Assertions.assertThrows(ArithmeticException.class, ()-> calculator.divide(a,b));
 
     }

@@ -1,5 +1,7 @@
 package org.example.productservice.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -13,6 +15,7 @@ public class Product extends BaseModel{
     String description;
     Double price;
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "category_id")
+    @JsonIgnore
     Category category;
 }
