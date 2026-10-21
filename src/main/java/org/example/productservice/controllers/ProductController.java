@@ -32,12 +32,12 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(
-            @RequestHeader("Token") String token,
+            //@RequestHeader("Token") String token,
             @PathVariable("id") Long id) throws ProductNotFoundException {
 
-        if(!tokenService.validateToken(token)){
-            throw new UnknownAccessTypeException("User is not authorized");
-        }
+//        if(!tokenService.validateToken(token)){
+//            throw new UnknownAccessTypeException("User is not authorized");
+//        }
 
         Product product = null;
 //        try {
